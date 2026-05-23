@@ -17,7 +17,7 @@ export default function GlucoseLogger({ onSuccess }: { onSuccess: () => void }) 
     try {
       await createGlucoseLog({
         userId: '11111111-1111-1111-1111-111111111111',
-        glucose: glucoseValue,
+        level: glucoseValue,
         context: context
       } as any);
       setLevel('');
@@ -33,7 +33,7 @@ export default function GlucoseLogger({ onSuccess }: { onSuccess: () => void }) 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <label htmlFor="glucose-level" className="text-sm font-medium text-gray-700">
+        <label htmlFor="glucose-level" className="eyebrow text-gray-500">
           Nivel de Glucosa (mg/dL)
         </label>
         <input
@@ -44,20 +44,20 @@ export default function GlucoseLogger({ onSuccess }: { onSuccess: () => void }) 
           required
           min="20"
           max="600"
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+          className="input"
           placeholder="Ej: 110"
         />
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="context" className="text-sm font-medium text-gray-700">
+        <label htmlFor="context" className="eyebrow text-gray-500">
           Contexto
         </label>
         <select
           id="context"
           value={context}
           onChange={(e) => setContext(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white"
+          className="input"
         >
           <option value="Ayunas">Ayunas</option>
           <option value="Post-prandial">Post-prandial</option>
@@ -68,7 +68,7 @@ export default function GlucoseLogger({ onSuccess }: { onSuccess: () => void }) 
       <button
         type="submit"
         disabled={isSubmitting || !level}
-        className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-black text-[var(--accent)] border border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-colors w-full py-3 rounded-md font-normal uppercase tracking-widest"
       >
         {isSubmitting ? 'Guardando...' : 'Registrar'}
       </button>

@@ -11,7 +11,7 @@ export default function GlucosePage() {
   const refreshLogs = async () => {
     try {
       const data = await getGlucoseLogs('11111111-1111-1111-1111-111111111111');
-      setLogs(data);
+      setLogs(data as GlucoseLog[]);
     } catch (error) {
       setLogs([]);
     }
@@ -22,22 +22,27 @@ export default function GlucosePage() {
   }, []);
 
   return (
-    <main className="min-h-screen flex flex-col p-4 md:p-8 bg-forge-black text-saga-cream">
-      <div className="w-full max-w-5xl mx-auto flex flex-col gap-8 mt-4">
-        <h1 className="text-3xl font-syne text-viking-red uppercase tracking-wide border-b-2 border-shield-gray pb-4">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2 mb-4 border-b border-[#3D3D3D] pb-6">
+        <span className="eyebrow text-[var(--accent)]">CAPÍTULO I - DASHBOARD</span>
+        <h1 className="text-4xl font-bold section-title">
           Control de Glucemia
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <section className="bg-forge-black p-6 border-2 border-shield-gray rounded-none">
-            <h2 className="text-xl font-syne mb-6 text-saga-cream">Nuevo Registro</h2>
-            <GlucoseLogger onSuccess={refreshLogs} />
-          </section>
-          <section className="bg-forge-black p-6 border-2 border-shield-gray rounded-none flex flex-col gap-6">
-            <h2 className="text-xl font-syne text-saga-cream">Historial</h2>
-            <GlucoseHistory logs={logs} />
-          </section>
-        </div>
+        <p className="text-white max-w-2xl mt-2 leading-relaxed">
+          Registra tus niveles de glucosa y haz seguimiento de tus métricas clave. <br/>
+          Mantén tu historial actualizado para ajustar los factores de corrección.
+        </p>
       </div>
-    </main>
+      <div className="base-grid">
+        <section className="panel">
+          <h2 className="eyebrow mb-6"><span className="text-gray-500 mr-2">S 01</span> <span className="text-white">Nuevo Registro</span></h2>
+          <GlucoseLogger onSuccess={refreshLogs} />
+        </section>
+        <section className="panel flex flex-col gap-6">
+          <h2 className="eyebrow"><span className="text-gray-500 mr-2">S 02</span> <span className="text-white">Historial</span></h2>
+          <GlucoseHistory logs={logs} />
+        </section>
+      </div>
+    </div>
   );
 }

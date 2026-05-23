@@ -19,9 +19,9 @@ export interface Meal {
 
 export interface GlucoseLogData {
   userId: string;
-  glucose: number;
-  measuredAt?: string;
-  notes?: string;
+  level: number;
+  timestamp?: string;
+  context?: string;
 }
 
 export async function getGlucoseLogs(userId: string): Promise<GlucoseLogData[]> {
@@ -109,7 +109,7 @@ export async function createFood(data: Omit<Food, 'id'>): Promise<Food> {
 }
 
 export async function getMeals(userId: string): Promise<Meal[]> {
-  const response = await fetch(`http://localhost:3000/meals?userId=${userId}`, { cache: 'no-store' });
+  const response = await fetch(`http://localhost:3000/meals/user/${userId}`, { cache: 'no-store' });
   
   if (!response.ok) {
     throw new Error('Failed to fetch meals');

@@ -71,6 +71,22 @@ FILE_MODIFICATION_POLICY: EXPLICIT_ONLY
   - **Tarea**: Creación de la página principal de Glucemia (`/glucose`) implementando Lifting State Up, corrección del mapeo de datos de BD (`level`, `context`) y hardcodeo de URLs absolutas en el cliente API (`http://localhost:8080`).
   - **Archivos**: `src/app/glucose/page.tsx`, `src/components/GlucoseLogger.tsx`, `src/components/GlucoseHistory.tsx`, `src/services/api.ts`, `src/app/page.tsx`.
   - **Pendientes**: Integrar sistema de autenticación real para reemplazar el uso estático de UUID en los componentes.
+
+- **2026-05-23**: 
+  - **Tarea**: Refactor de función `getMeals` a Path Parameters y múltiples mejoras de UI/UX en formulario de alimentos (placeholders, reset de estados numéricos a '0', contraste de etiquetas y botones primarios, y opciones hardcodeadas).
+  - **Archivos**: `src/services/api.ts`, `src/components/FoodManager.tsx`.
+  - **Pendientes**: Corregir error de tipado TypeScript preexistente en `src/app/glucose/page.tsx` (Property 'level' is missing). Integrar autenticación real para reemplazar UUID estático.
+
+- **2026-05-23**: 
+  - **Tarea**: Refactorización integral y estricta del UI/UX al sistema de diseño v1King (FinanceFlow). Creación de App Shell (Header, StatusStrip, Layout base) y reescritura de los estilos globales (`globals.css`) con variables CSS para modo oscuro puro. Reestructuración del módulo de glucemia (`/glucose`) aplicando clases utilitarias (`.panel`, `.input`, `.btn`), fondos negros y botones transparentes. Corrección crítica de tipado (mapping `glucose` a `level`) que bloqueaba el build en producción.
+  - **Archivos**: `src/app/globals.css`, `src/app/layout.tsx`, `src/components/Header.tsx`, `src/app/glucose/page.tsx`, `src/components/GlucoseLogger.tsx`, `src/components/GlucoseHistory.tsx`.
+  - **Pendientes**: Reemplazar el UUID estático (`11111111-1111-1111-1111-111111111111`) por autenticación real. Extender las correcciones del diseño estricto a las vistas `FoodManager` y `BolusCalculator`.
+
+- **2026-05-23**: 
+  - **Tarea**: Aplicación estricta del sistema de diseño v1King a la Calculadora de Bolos. Refactorización visual pura sin alteración de lógica ni estado. Incorporación de layout tipo ledger-row en panel de resultados con fuentes y acentos de color propios del brand book. Corrección definitiva del data binding en el historial de glucemia (`level`, `context`, `timestamp`).
+  - **Archivos**: `src/app/calculator/page.tsx`, `src/components/BolusCalculator.tsx`, `src/components/GlucoseHistory.tsx`, `src/app/glucose/page.tsx`, `src/components/GlucoseLogger.tsx`, `src/services/api.ts`.
+  - **Pendientes**: Aplicar el diseño estricto a los demás módulos (como `FoodManager`). Integrar sistema de autenticación real.
+
 ## REGLA DE PERSISTENCIA (Bitácora de Sesión)
 - Al finalizar una tarea o antes de cerrar el chat, te pediré: "Generá el Session Summary".
 - Tu tarea es editar este mismo archivo (GEMINI.md) y añadir una entrada en la sección 'HISTORIAL DE SESIONES'.

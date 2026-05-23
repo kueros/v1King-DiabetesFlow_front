@@ -2,7 +2,7 @@ export interface GlucoseLog {
   id?: string;
   userId?: string;
   level: number;
-  measuredAt?: string;
+  timestamp?: string;
   context?: string;
 }
 
@@ -12,21 +12,22 @@ export default function GlucoseHistory({ logs }: { logs: GlucoseLog[] }) {
   return (
     <div className="flex flex-col gap-4">
       {!logs || logs.length === 0 ? (
-        <div className="bg-forge-black border-2 border-shield-gray rounded-none p-4 text-center">
-          <p className="font-space text-saga-cream text-sm uppercase tracking-widest">Sin registros de glucemia aún</p>
+        <div className="text-center py-4">
+          <p className="eyebrow">Sin registros de glucemia aún</p>
         </div>
       ) : (
         logs.map((log, index) => (
-          <div key={index} className="flex justify-between items-center p-4 bg-forge-black border-2 border-shield-gray rounded-none">
+          <div key={index} className="flex justify-between items-center py-4 border-b border-[#3D3D3D] last:border-0">
             <div className="flex flex-col gap-1">
-              <span className="text-xl font-mono text-viking-red">
-                {log.level} <span className="text-sm font-space text-shield-gray">mg/dL</span>
+              <span className="text-white font-mono text-sm uppercase">
+                {log.timestamp ? new Date(log.timestamp).toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' }) : 'FECHA DESCONOCIDA'}
               </span>
-              <span className="text-sm font-inter text-saga-cream">{log.context || 'Sin contexto'}</span>
+              <span className="text-gray-500 text-sm uppercase tracking-wider">{log.context}</span>
             </div>
-            <span className="text-xs font-space text-shield-gray uppercase">
-              {log.measuredAt ? new Date(log.measuredAt).toLocaleString('es-AR') : 'FECHA DESCONOCIDA'}
-            </span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-white font-mono text-2xl font-bold">{log.level}</span>
+              <span className="text-gray-500 font-mono text-sm">mg/dL</span>
+            </div>
           </div>
         ))
       )}
