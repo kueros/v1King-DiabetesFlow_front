@@ -1,0 +1,14 @@
+# .agyignore
+# Ignorar formateadores y configuración global
+.eslintrc.js
+.prettierrc
+
+# Proteger los módulos de producción de limpiezas automáticas
+src/modules/**/*.ts
+!src/modules/shared/target-task.ts # Puedes usar ! para permitir excepciones
+
+
+
+node_modules/
+dist/
+.env

@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
+import { Space_Grotesk, Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const space = Space_Grotesk({
   subsets: ["latin"],
+  variable: "--font-space",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const syne = Syne({
   subsets: ["latin"],
+  variable: "--font-syne",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +34,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className="h-full">
+      <body className={`${space.variable} ${syne.variable} ${inter.variable} ${mono.variable} min-h-full flex flex-col bg-forge-black text-saga-cream font-inter antialiased`}>
+        <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between">
+              <div className="flex items-center gap-8">
+                <span className="font-bold text-xl text-indigo-600 tracking-tight">DiabetesFlow</span>
+                <div className="hidden md:flex space-x-1">
+                  <Link href="/" className="text-gray-600 hover:text-indigo-600 hover:bg-gray-50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Dashboard
+                  </Link>
+                  <Link href="/calculator" className="text-gray-600 hover:text-indigo-600 hover:bg-gray-50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Calculadora
+                  </Link>
+                  <Link href="/food" className="text-gray-600 hover:text-indigo-600 hover:bg-gray-50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Alimentación
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div className="flex-1">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
