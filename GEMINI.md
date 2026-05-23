@@ -60,8 +60,17 @@ FILE_MODIFICATION_POLICY: EXPLICIT_ONLY
 - **2026-05-22**: 
   - **Tarea**: Tipado estricto en API y aplicación del sistema de diseño v1King Brand Book (Tailwind + Next Fonts).
   - **Archivos**: `src/services/api.ts`, `tailwind.config.ts`, `src/app/layout.tsx`, `src/components/FoodManager.tsx`.
-  - **Pendientes**: Expandir la aplicación de los tokens visuales v1King al resto de componentes (`GlucoseForm`, `GlucoseHistory`, `BolusCalculator`) y vistas principales.
+  - **Pendientes**: Expandir la aplicación de los tokens visuales v1King al resto de componentes (`GlucoseLogger`, `GlucoseHistory`) y vistas principales (`DashboardPage`). Reemplazar uso del UUID estático por contexto de autenticación real.
 
+- **2026-05-22**: 
+  - **Tarea**: Expansión del diseño v1King a BolusCalculator, creación de ActivityManager, refactor de endpoints (/glucose, /activities) y renombramiento/validación estricta en GlucoseLogger.
+  - **Archivos**: `src/services/api.ts`, `src/components/BolusCalculator.tsx`, `src/components/ActivityManager.tsx`, `src/app/activities/page.tsx`, `src/app/calculator/page.tsx`, `src/app/globals.css`, `src/components/GlucoseLogger.tsx`, `src/components/GlucoseHistory.tsx`, `src/app/page.tsx`.
+  - **Pendientes**: Refactorizar el diseño de `GlucoseLogger`, `GlucoseHistory` y el layout de `DashboardPage` (`src/app/page.tsx`) para adoptar los tokens visuales v1King. Integrar autenticación real.
+
+- **2026-05-22**: 
+  - **Tarea**: Creación de la página principal de Glucemia (`/glucose`) implementando Lifting State Up, corrección del mapeo de datos de BD (`level`, `context`) y hardcodeo de URLs absolutas en el cliente API (`http://localhost:8080`).
+  - **Archivos**: `src/app/glucose/page.tsx`, `src/components/GlucoseLogger.tsx`, `src/components/GlucoseHistory.tsx`, `src/services/api.ts`, `src/app/page.tsx`.
+  - **Pendientes**: Integrar sistema de autenticación real para reemplazar el uso estático de UUID en los componentes.
 ## REGLA DE PERSISTENCIA (Bitácora de Sesión)
 - Al finalizar una tarea o antes de cerrar el chat, te pediré: "Generá el Session Summary".
 - Tu tarea es editar este mismo archivo (GEMINI.md) y añadir una entrada en la sección 'HISTORIAL DE SESIONES'.

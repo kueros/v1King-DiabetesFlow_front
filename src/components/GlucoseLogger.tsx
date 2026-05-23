@@ -3,24 +3,26 @@
 import { useState } from 'react';
 import { createGlucoseLog } from '@/services/api';
 
-export default function GlucoseForm() {
+export default function GlucoseLogger({ onSuccess }: { onSuccess: () => void }) {
   const [level, setLevel] = useState<string>('');
   const [context, setContext] = useState<string>('Ayunas');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!level) return;
+    const glucoseValue = Number(level);
+    if (!level || isNaN(glucoseValue)) return;
 
     setIsSubmitting(true);
     try {
       await createGlucoseLog({
         userId: '11111111-1111-1111-1111-111111111111',
-        glucose: Number(level),
-        notes: context
-      });
+        glucose: glucoseValue,
+        context: context
+      } as any);
       setLevel('');
       setContext('Ayunas');
+      onSuccess();
     } catch (error) {
       console.error(error);
     } finally {
